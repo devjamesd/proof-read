@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { findByTestAttribute, checkProps } from "./../../../Utils";
+import { findByTestAttribute, checkProps } from "../../../Utils";
 import SharedButton from "./index";
 
 describe("SharedButton Component", () => {
@@ -14,18 +14,29 @@ describe("SharedButton Component", () => {
       expect(propsError).toBeUndefined();
     });
   });
+
   describe("Rendering", () => {
-    let wrapper;
+    let wrapper, mockFunc;
+
     beforeEach(() => {
+      mockFunc = jest.fn();
       const props = {
         buttonText: "Example Button Text",
-        emitEvent: () => {}
+        emitEvent: mockFunc
       };
       wrapper = shallow(<SharedButton {...props} />);
     });
     it("should render a button", () => {
       const button = findByTestAttribute(wrapper, "buttonComponent");
       expect(button.length).toBe(1);
+    });
+
+    it("Should emit callback on click event", () => {
+      const button = wrapper.find(`[data-test='buttonComponent']`);
+      button.simulate("click");
+      button.simulate("click");
+      const callback = mockFunc.mock.calls.length;
+      expect(callback).toBeGreaterThan(0);
     });
   });
 });
