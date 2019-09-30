@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   exampleMethod_returnsAValue(number) {
-    //return number * 20;
+    return number * 20;
   }
 
   fetch() {
