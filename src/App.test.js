@@ -23,7 +23,7 @@ describe("App Component", () => {
     wrapper = shallow(<App store={testStore(initialState)} />)
       .childAt(0)
       .dive();
-    console.log(wrapper.debug());
+    //console.log(wrapper.debug());
   });
 
   it("Should render without errors", () => {
